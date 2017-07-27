@@ -16,13 +16,13 @@ To identify the bottlenecks one can employ various techniques:
 * embed the diagnostics into the application: dedicatedly measure the wall clock time spent in particular functions, or write the wall clock time and execution status into a log. 
 * profile the resource utilization: CPU load, various IO including cache misses, memory allocation from the OS. 
 
-Some basic considerations on how to avoid performance overhead: 
 
+Some basic considerations on how to avoid performance overhead: 
 * Avoid data copying.
 * Use dynamic memory allocation only when appropriate, and only as much as necessary. Use `reserve` and similar functions. Consider re-using allocated memory (make local object a member). Consider using custom allocators.
 * Facilitate compiler optimiaztions: keep simple functions in headers, so they can be inlined; pass by value when appropriate (for RVO and copy ellision); don't abuse `const` (can prevent from moving);
 * Facilitate CPU caching: use small objects, consider alignment of the member variables, prefer lazy evaluation.
 * Avoid branches (`if` statements, virtual functions, function pointers).
-* Consdier using `float` instead of `double`. 
+* Consdier using `float` instead of `double`. Avoid conversions between integers and floats.
 
 In general, this is a very broad topic, and it very much depends on the application. 
